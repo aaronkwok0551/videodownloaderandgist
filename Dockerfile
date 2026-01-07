@@ -1,6 +1,5 @@
 FROM python:3.11-slim
 
-# system deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     ca-certificates \
@@ -15,4 +14,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["sh", "-c", "unset STREAMLIT_SERVER_PORT; echo \"PORT is ${PORT}\"; streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT:-8080} --server.enableCORS=false --server.enableXsrfProtection=false"]
+CMD ["sh", "-c", "unset STREAMLIT_SERVER_PORT; echo \"PORT=$PORT\"; streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT:-8080} --server.enableCORS=false --server.enableXsrfProtection=false"]
