@@ -17,4 +17,5 @@ COPY . .
 ENV PORT=8080
 
 EXPOSE 8080
-CMD sh -c 'streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT:-8080} --server.enableCORS=false --server.enableXsrfProtection=false'
+CMD ["sh", "-c", "streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT} --server.enableCORS=false --server.enableXsrfProtection=false"]
+CMD sh -c 'echo "PORT is $PORT" && streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT'
