@@ -13,9 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Railway 會提供 PORT（千祈唔好自己 ENV PORT=8080）
-# EXPOSE 8080 其實可有可無，但留低都無害
 EXPOSE 8080
 
-# 用一個 CMD，先 print PORT，再起 Streamlit
-CMD ["sh", "-c", "echo \"PORT is $PORT\" && streamlit run app.py --server.address=0.0.0.0 --server.port=$PORT --server.enableCORS=false --server.enableXsrfProtection=false"]
+CMD ["sh", "-c", "unset STREAMLIT_SERVER_PORT; echo \"PORT is ${PORT}\"; streamlit run app.py --server.address=0.0.0.0 --server.port=${PORT:-8080} --server.enableCORS=false --server.enableXsrfProtection=false"]
